@@ -1,6 +1,6 @@
 package br.com.marcio.api.services.impl;
 
-import br.com.marcio.api.domain.User;
+import br.com.marcio.api.domain.Users;
 import br.com.marcio.api.repositories.UserRepository;
 import br.com.marcio.api.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository repository;
     @Override
-    public User findById(Integer id) {
-        Optional<User> obj = repository.findById(id);
+    public Users findById(Integer id) {
+        Optional<Users> obj = repository.findById(id);
         return obj.orElse(null);
     }
 }
