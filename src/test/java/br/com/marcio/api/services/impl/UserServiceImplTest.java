@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,6 +27,7 @@ class UserServiceImplTest {
     public static final String NAME         = "vladir";
     public static final String EMAIL        = "valdir@email.com";
     public static final String PASSWORD     = "123";
+    public static final int INDEX = 0;
     @InjectMocks
     private UserServiceImpl service;
 
@@ -71,7 +73,22 @@ class UserServiceImplTest {
 
 
     @Test
-    void findAll() {
+    void whenFindAllThenReturnAnListOfUsers() {
+          when(repository.findAll()).thenReturn(List.of(user));
+
+        List<Users> response = service.findAll();
+
+        assertNotNull(response); //não é nulo
+        assertEquals(1, response.size()); //tamanho da lista é 1
+        assertEquals(Users.class, response.get(INDEX).getClass());//objeto que vai vir dentro da lista tenha a classo
+        // do tipouser
+
+        assertEquals(ID, response.get(INDEX).getId());
+        assertEquals(EMAIL, response.get(INDEX).getEmail());
+        assertEquals(NAME, response.get(INDEX).getName());
+        assertEquals(PASSWORD, response.get(INDEX).getPassword());
+
+
     }
 
     @Test
