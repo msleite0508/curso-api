@@ -100,7 +100,7 @@ class UserServiceImplTest {
         Users response = service.create(userDTO);
 
         assertNotNull(response);
-        //assertNotNull(Users.class, response.getClass());
+        assertNotNull(Users.class, String.valueOf(response.getClass()));
         assertEquals(ID, response.getId());
         assertEquals(NAME, response.getName());
         assertEquals(EMAIL, response.getEmail());
@@ -121,7 +121,18 @@ class UserServiceImplTest {
     }
 
     @Test
-    void update() {
+    void whenUpdateThenReturnSuccess() {
+        when(repository.save(user)).thenReturn(user);
+
+        Users response = service.update(userDTO);
+
+        assertNotNull(response);
+        assertEquals(Users.class, response.getClass());
+        assertEquals(ID, response.getId());
+        assertEquals(NAME, response.getName());
+        assertEquals(EMAIL, response.getEmail());
+        assertEquals(PASSWORD, response.getPassword());
+
     }
 
     @Test
